@@ -1,0 +1,14 @@
+model {
+
+	for (i in 1:length(FGM)) {
+		FGM[i] ~ dpois(lambda[i])
+		log(lambda[i]) <- betapos[pos[i]] + betaHt * heightstand[i]
+		FGMrep[i] ~ dpois(lambda[i])
+	}
+
+	for (j in 1:max(pos)) {
+		betapos[j] ~ dnorm(0, 0.0001)
+	}
+	betaHt ~ dnorm(0, 0.0001)
+
+}

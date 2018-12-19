@@ -1,0 +1,24 @@
+data {
+	dimY <- dim(price)
+	monthcent <- month - mean(month)
+}
+model {
+	for (j in 1:dimY[1]) {
+		for (i in 1:dimY[2]) {
+ 			price[j,i] ~ dnorm(beta[1,j] + beta[2,j]*monthcent[i], sigmasqyinv)
+ 		}
+ 		beta[1,j] ~ dnorm(mubeta1, Sigmasqbeta1inv)
+ 		beta[2,j] ~ dnorm(mubeta2, Sigmasqbeta2inv)
+	}
+
+	mubeta1 ~ dnorm(0, 0.000001)
+	mubeta2 ~ dnorm(0, 0.000001)
+	Sigmasqbeta1inv <- 1/Sigmabeta1^2
+	Sigmabeta1 ~ dunif(0, 1000) 
+	Sigmasqbeta2inv <- 1/Sigmabeta2^2
+	Sigmabeta2 ~ dunif(0, 1000)
+	Sigmasqbeta1 <- Sigmabeta1^2
+	Sigmasqbeta2 <- Sigmabeta2^2
+	sigmasqyinv ~ dgamma(0.0001, 0.0001)
+	sigmasqy <- 1/sigmasqyinv
+}

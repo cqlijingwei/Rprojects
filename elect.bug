@@ -1,0 +1,13 @@
+model {
+	for (i in 1:length(res)) {
+		res[i] ~ dbern(prob[i])
+		logit(prob[i]) <- betaintercept + betastate[state[i]] + betaincome * incomescaled[i]
+		resrep[i] ~ dbern(prob[i])
+	}
+	for (j in 1:max(state)) {
+		betastate[j] ~ dnorm(0, 1/sigmastate[j]^2)
+		sigmastate[j] ~ dunif(0, 1000)
+	}
+	betaintercept ~ dt(0, 0.01, 1)
+	betaincome ~ dt(0, 0.16, 1)	
+}
