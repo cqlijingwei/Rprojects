@@ -1,0 +1,11 @@
+model {
+	for (j in 1:J) {
+		psihat[j] ~ dnorm(psi[j], inv_sigmasq[j])
+		psi[j] ~ dnorm(psi0, 1/sigma0^2)
+	}
+	psihat_new ~ dnorm(psi_new, 25)
+	psi_new ~ dnorm(psi0, 1/sigma0^2)
+	psi0 ~ dnorm(0, 0.000001)
+	sigma0 ~ dunif(0, 1000)
+	sigmasq0 <- sigma0^2
+}
