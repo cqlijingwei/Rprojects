@@ -1,6 +1,8 @@
 # Rprojects
-A1 dataset: randomwikipedia.txt \n
+A1 dataset: randomwikipedia.txt
+
 A2 dataset: data.txt
+
 A3 dataset: polls2016.txt
 A3 JAGS file: polls20161.bug
 A4 dataset: hubbledata.txt
